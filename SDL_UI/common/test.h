@@ -15,4 +15,4 @@
     assert(0);                                                 \
   }
 
-
+void run_all_test();

@@ -47,7 +47,7 @@ static void _print(int fd, const char* fmt, va_list* vl)
 {
  char buffer [33];
  struct str fmt_str_itr = cstr(fmt);
- struct str_buf str_buf = str_buf_create(10, allocator);
+ struct str_buf str_buf = str_buf_create(10);
 
 
  struct str found = str_find_first(fmt_str_itr, cstr("%")); 

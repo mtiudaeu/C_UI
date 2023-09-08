@@ -139,7 +139,9 @@
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">include</AdditionalIncludeDirectories>
       <AdditionalModuleDependencies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">lib\SDl2.lib;lib\SDL2_ttf.lib;lib\SDL2_image.lib;lib\SDL2main.lib</AdditionalModuleDependencies>
     </ClCompile>
+    <ClCompile Include="map.c" />
     <ClCompile Include="render_type.c" />
+    <ClCompile Include="test.c" />
     <ClCompile Include="ui_file.c" />
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +151,7 @@
     <ClInclude Include="common\macros.h" />
     <ClInclude Include="common\str.h" />
     <ClInclude Include="common\test.h" />
+    <ClInclude Include="map.h" />
     <ClInclude Include="render_type.h" />
     <ClInclude Include="ui_file.h" />
   </ItemGroup>

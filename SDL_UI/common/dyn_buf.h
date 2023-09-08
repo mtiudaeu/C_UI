@@ -16,15 +16,37 @@ struct dyn_buf_info {
 }
 
 //--------------------------------------------------
-#define dyn_buf_create(type, param_capacity, param_allocator_cbs) \
+#define dyn_buf_create(type)                                       \
 {                                                                  \
  .dyn_buf_info = {                                                 \
-  .allocator_cbs=param_allocator_cbs,                            \
+  .allocator_cbs=default_allocators,                               \
+  .size = 0,                                                       \
+  .capacity = 50,						                           \
+  .size_of_one= sizeof(type)                                       \
+ },                                                                \
+ .data=param_allocator_cbs.malloc(sizeof(type)*param_capacity)     \
+}
+
+#define dyn_buf_create_1(type, param_capacity)                     \
+{                                                                  \
+ .dyn_buf_info = {                                                 \
+  .allocator_cbs=default_allocators,                               \
   .size = 0,                                                       \
   .capacity = param_capacity,                                      \
   .size_of_one= sizeof(type)                                       \
  },                                                                \
- .data=param_allocator_cbs.malloc(sizeof(type)*param_capacity)    \
+ .data=param_allocator_cbs.malloc(sizeof(type)*param_capacity)     \
+}
+
+#define dyn_buf_create_2(type, param_capacity, param_allocator_cbs) \
+{                                                                   \
+ .dyn_buf_info = {                                                  \
+  .allocator_cbs=param_allocator_cbs,                               \
+  .size = 0,                                                        \
+  .capacity = param_capacity,                                       \
+  .size_of_one= sizeof(type)                                        \
+ },                                                                 \
+ .data=param_allocator_cbs.malloc(sizeof(type)*param_capacity)      \
 }
 
 #define dyn_buf_destroy(dyn_buf)                          \

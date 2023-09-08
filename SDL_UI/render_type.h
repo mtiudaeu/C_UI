@@ -1,5 +1,7 @@
 #pragma once
 
+#include "common/str.h"
+
 struct SDL_Renderer;
 
 enum RENDER_TYPE {
@@ -9,8 +11,8 @@ enum RENDER_TYPE {
 
 typedef struct {
 	enum RENDER_TYPE type;
+	struct str name;
 	void* data;
-
 } render_type;
 
 render_type* render_type_create(enum RENDER_TYPE type);
