@@ -11,17 +11,17 @@ static const struct str invalid_str = {
 };
 
 //--------------------
-struct str_buf str_buf_create(size_t size)
+struct str_buf str_buf_create(size_t capacity)
 {
-	return str_buf_create_1(size, default_allocators);
+	return str_buf_create_1(capacity, default_allocators);
 }
 //--------------------
-struct str_buf str_buf_create_1(size_t size, struct allocator_cbs allocator_cbs)
+struct str_buf str_buf_create_1(size_t capacity, struct allocator_cbs allocator_cbs)
 {
  const size_t size_of_one = sizeof(char);
- char* data = allocator_cbs.malloc(size*size_of_one);
+ char* data = allocator_cbs.malloc(capacity *size_of_one);
 
- struct str_buf str_buf = dyn_buf_create_2(int, size, allocator_cbs);
+ struct str_buf str_buf = dyn_buf_create_2(int, capacity, allocator_cbs);
 /*
  struct str_buf str_buf = {
   .dyn_buf_info = {
@@ -34,6 +34,14 @@ struct str_buf str_buf_create_1(size_t size, struct allocator_cbs allocator_cbs)
  };
 */
  return str_buf;
+}
+
+//------------------
+struct str_buf str_buf_copy(struct str* str)
+{
+	struct str_buf str_buf = str_buf_create(str->size);
+	memcpy(str_buf.data, str->data, str->size * sizeof(*str->data));
+	return str_buf;
 }
 
 //--------------------

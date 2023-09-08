@@ -117,7 +117,7 @@ void _heapify(struct dyn_buf_info dyn_buf_info, void* data, int (*comparator)(vo
  }
 }
 //--------------------------------------------------
-void _dyn_buf_sort(struct dyn_buf_info dyn_buf_info, void* data, int (*comparator)(void* lhs, void* rhs))
+void _dyn_buf_sort_specific(struct dyn_buf_info dyn_buf_info, void* data, int (*comparator)(void* lhs, void* rhs))
 {
  const size_t size_of_one = dyn_buf_info.size_of_one; 
  const size_t size = dyn_buf_info.size;

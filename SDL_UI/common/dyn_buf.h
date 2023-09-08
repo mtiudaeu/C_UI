@@ -9,7 +9,7 @@ struct dyn_buf_info {
  size_t size_of_one;
 };
 
-#define generic_dyn_buf(type)             \
+#define dyn_buf_define(type)             \
 {                                 \
  struct dyn_buf_info dyn_buf_info;\
  type* data;                      \
@@ -75,14 +75,14 @@ void _dyn_buf_ensure_capacity_for_add(struct dyn_buf_info* dyn_buf_info, void** 
 //--------------------------------------------------
 int _dyn_buf_comparator_int(void* lhs, void* rhs);
 
-#define generic_dyn_buf_sort(dyn_buf) \
- _generic_dyn_buf_sort(dyn_buf.dyn_buf_info, dyn_buf.data, *dyn_buf.data)
+#define dyn_buf_sort(dyn_buf) \
+ _dyn_buf_sort(dyn_buf.dyn_buf_info, dyn_buf.data, *dyn_buf.data)
 
-#define _generic_dyn_buf_sort(dyn_buf_info, data, typed_var) \
- _dyn_buf_sort(dyn_buf_info, (void*) data,                   \
+#define _dyn_buf_sort(dyn_buf_info, data, typed_var) \
+ _dyn_buf_sort_specific(dyn_buf_info, (void*) data,                   \
  _Generic(typed_var, int: &_dyn_buf_comparator_int))
 
-void _dyn_buf_sort(struct dyn_buf_info dyn_buf_info, void* data, int (*comparator)(void* lhs, void* rhs));
+void _dyn_buf_sort_specific(struct dyn_buf_info dyn_buf_info, void* data, int (*comparator)(void* lhs, void* rhs));
 
 //--------------------------------------------------
 /*
