@@ -39,7 +39,11 @@ int _dyn_buf_comparator_int(void* lhs, void* rhs)
  }
  return 1;
 }
-
+//--------------------------------------------------
+int _dyn_buf_find_first_idx_specific(struct dyn_buf_info dyn_buf_info, void* data, int (*comparator)(void* lhs, void* rhs))
+{
+    return -1;
+}
 //--------------------------------------------------
 void _max_heap(struct dyn_buf_info dyn_buf_info, void* data, int (*comparator)(void* lhs, void* rhs))
 {

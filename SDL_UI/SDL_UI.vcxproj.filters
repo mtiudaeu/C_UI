@@ -51,6 +51,9 @@
     <ClCompile Include="test_map.c">
       <Filter>Source Files\common</Filter>
     </ClCompile>
+    <ClCompile Include="test_dyn_buf.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ui_file.h">
@@ -88,6 +91,9 @@
     </ClInclude>
     <ClInclude Include="defines.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="test_dyn_buf.h">
+      <Filter>Header Files\common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

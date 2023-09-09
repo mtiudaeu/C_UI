@@ -6,8 +6,8 @@
 void test_map_run() {
     LOG_INFO("test_map start");
 
-    struct map_int_int map_define(int, int);
-    struct map_int_int map;
+    //struct map_int_int map_define(int, int);
+    //struct map_int_int map;
 
 
 
