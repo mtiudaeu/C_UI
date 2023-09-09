@@ -4,15 +4,17 @@
 #include "map.h"
 
 void test_map_run() {
-    LOG_INFO("test_map start");
+    LOG_INFO("test_map Start");
 
-    //struct map_int_int map_define(int, int);
-    //struct map_int_int map;
+    struct map_int_int map_define(int, int) map = map_create(int, int);
+
+    int key = 1;
+    int value = 1;
+    map_add(map, &key, &value);
 
 
 
-
-
+    LOG_INFO("test_map Done");
     /*
     struct map_str_str {
         struct map_node {

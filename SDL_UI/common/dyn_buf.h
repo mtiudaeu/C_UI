@@ -20,16 +20,17 @@ struct dyn_buf_info {
 
 //--------------------------------------------------
 // Create
+#define DYN_BUF_DEFAULT_CAPACITY 10
 
-#define dyn_buf_create(type)                                       \
-{                                                                  \
- .dyn_buf_info = {                                                 \
-  .allocator_cbs=default_allocators,                               \
-  .size = 0,                                                       \
-  .capacity = 50,						                           \
-  .size_of_one= sizeof(type)                                       \
- },                                                                \
- .data=param_allocator_cbs.malloc(sizeof(type)*param_capacity)     \
+#define dyn_buf_create(type)												\
+{																			\
+ .dyn_buf_info = {															\
+  .allocator_cbs=default_allocators,										\
+  .size = 0,																\
+  .capacity = DYN_BUF_DEFAULT_CAPACITY,															\
+  .size_of_one= sizeof(type)												\
+ },																			\
+ .data=default_allocators.malloc(sizeof(type)*DYN_BUF_DEFAULT_CAPACITY)     \
 }
 
 #define dyn_buf_create_1(type, param_capacity)                     \
@@ -40,7 +41,7 @@ struct dyn_buf_info {
   .capacity = param_capacity,                                      \
   .size_of_one= sizeof(type)                                       \
  },                                                                \
- .data=param_allocator_cbs.malloc(sizeof(type)*param_capacity)     \
+ .data=default_allocators.malloc(sizeof(type)*param_capacity)     \
 }
 
 #define dyn_buf_create_2(type, param_capacity, param_allocator_cbs) \
@@ -88,13 +89,13 @@ int _dyn_buf_comparator_int(void* lhs, void* rhs);
 //--------------------------------------------------
 // Find
 #define dyn_buf_find_first_idx(dyn_buf, value) \
-	_dyn_buf_find_first_idx(dyn_buf.dyn_buf_info, dyn_buf.data, *dyn_buf.data)
+	_dyn_buf_find_first_idx(dyn_buf.dyn_buf_info, dyn_buf.data, value, *dyn_buf.data)
 
-#define _dyn_buf_find_first_idx(dyn_buf_info, data, typed_var)		\
-	_dyn_buf_find_first_idx_specific(dyn_buf_info, (void*) data,	\
+#define _dyn_buf_find_first_idx(dyn_buf_info, data, value, typed_var)		\
+	_dyn_buf_find_first_idx_specific(dyn_buf_info, (void*) data, (void*) value,	\
 	_Generic((typed_var), int: &_dyn_buf_comparator_int) )
 
-int _dyn_buf_find_first_idx_specific(struct dyn_buf_info dyn_buf_info, void* data, int (*comparator)(void* lhs, void* rhs));
+int _dyn_buf_find_first_idx_specific(struct dyn_buf_info dyn_buf_info, void* data, void* value, int (*comparator)(void* lhs, void* rhs));
 
 //--------------------------------------------------
 // Sort

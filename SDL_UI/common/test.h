@@ -1,17 +1,19 @@
 #pragma once
 
+#include "log.h"
+
 #include <stdio.h>
 #include <assert.h>
 
-#define TEST_ASSERT_MSG(msg)                                   \
-  printf("Test Error : %s, %s:%d\n", msg, __FILE__, __LINE__); \
+#define TEST_ASSERT_MSG(test_title, msg)                                   \
+  LOG_ERROR("Test Error : %s, %s\n", msg); \
   assert(0);                                               \
 
-#define TEST_ASSERT_TRUE(expr)                                     \
+#define TEST_ASSERT_TRUE(test_title, expr)                                     \
   if (expr) {                                                      \
-    printf("Test Success\n");                                      \
+    LOG_INFO("Test Success : %s\n", test_title);                                      \
   } else {                                                         \
-    printf("Test Error : %s, %s:%d\n", #expr, __FILE__, __LINE__); \
+    LOG_ERROR("Test Error : %s, %s\n", test_title, #expr ); \
     assert(0);                                                 \
   }
 

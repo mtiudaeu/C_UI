@@ -1,5 +1,6 @@
 #pragma once
 
+#include "common/macros.h"
 #include "common/str.h"
 #include "common/dyn_buf.h"
 
@@ -10,7 +11,31 @@
 {                                                           \
     struct key_arr dyn_buf_define(key_type) key_arr;        \
     struct value_arr dyn_buf_define(value_type) value_arr;  \
-};
+}
+
+#define map_create(key_type, value_type) \
+{ \
+    .key_arr = dyn_buf_create(key_type), \
+    .value_arr = dyn_buf_create(value_type) \
+}
+
+#define map_add(map, key, value) \
+{ \
+    int VAR_NAME(_found_) = dyn_buf_find_first_idx(map.key_arr, key); \
+}
+/*
+    if (VAR_NAME(_found_) == -1) \
+    { \
+        dyn_buf_add(map.key_arr, key); \
+        dyn_buf_add(map.value_arr, value); \
+    } \
+    else \
+    { \
+       map.value_arr[VAR_NAME(_found_)] = *value  \
+    } \    
+}
+*/
+
 
 /*
 
