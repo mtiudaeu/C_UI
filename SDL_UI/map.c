@@ -5,18 +5,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/*
 //--------------------------------------------------
 struct map_node_str_str* _create_node(struct str key, struct str value) {
     struct map_node_str_str* newNode = default_allocators.malloc(sizeof(struct map_node_str_str));
     //mdtmp
-    /*
-    if (newNode) {
-        newNode->key = key;
-        newNode->value = value;
-        newNode->left = NULL;
-        newNode->right = NULL;
-    }
-    */
+    
+    //if (newNode) {
+    //    newNode->key = key;
+    //    newNode->value = value;
+    //    newNode->left = NULL;
+    //    newNode->right = NULL;
+    //}
+    
     return newNode;
 
 }
@@ -42,6 +43,7 @@ void map_str_str_traverse(struct map_str_str* map, int (*callback)(struct str* k
 {
 }
 
+*/
 /*
 
 // Function to create a new tree node

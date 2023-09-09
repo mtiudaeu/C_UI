@@ -1,6 +1,35 @@
 #pragma once
 
 #include "common/str.h"
+#include "common/dyn_buf.h"
+
+#define MAP_INVALID_NODE -1
+
+
+#define map_define(key_type, value_type)                    \
+{                                                           \
+    struct key_arr dyn_buf_define(key_type) key_arr;        \
+    struct value_arr dyn_buf_define(value_type) value_arr;  \
+};
+
+/*
+
+#define map_define(key_type, value_type)        \
+{                                               \
+    struct map_node {                           \
+        key_type* key;                          \
+        value_type* value;                      \
+        struct map_node* left;                  \
+        struct map_node* right;                 \
+    } * root;                                   \
+    size_t size;                                \
+    void (*key_copy)(const key_type* key);      \
+    void (*key_delete)(key_type* key);          \
+    void (*value_copy)(const value_type* key);  \
+    void (*value_delete)(value_type* key);      \
+};
+*/
+/*
 
 struct map_node_str_str {
     struct str* key;
@@ -19,6 +48,7 @@ void map_str_str_delete(struct map_str_str* map, struct str key);
 struct str map_str_str_get(struct map_str_str* map, struct str key);
 void map_str_str_traverse(struct map_str_str* map, int (*callback)(struct str* key, struct str* value));
 
+*/
 
 /*
 TreeNode* createNode(int key, int value)

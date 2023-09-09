@@ -3,6 +3,8 @@
 #include <string.h>
 
 #include "ui_file.h"
+#include "defines.h"
+#include "common/test.h"
 
 #define SDL_MAIN_HANDLED
 #include <SDL2/SDL.h>
@@ -135,8 +137,13 @@ void presentScene(void)
 	SDL_RenderPresent(app.renderer);
 }
 
-int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hInstPrev, PSTR cmdline, int cmdshow)
+// int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hInstPrev, PSTR cmdline, int cmdshow)
+int main(void)
 {
+#if RUN_TEST_ON_STARTUP
+	run_all_test();
+#endif //RUN_TEST_ON_STARTUP
+
 	memset(&app, 0, sizeof(App));
 
 	init();

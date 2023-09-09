@@ -48,6 +48,9 @@
     <ClCompile Include="test_str.c">
       <Filter>Source Files\common</Filter>
     </ClCompile>
+    <ClCompile Include="test_map.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ui_file.h">
@@ -79,6 +82,12 @@
     </ClInclude>
     <ClInclude Include="test_str.h">
       <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="test_map.h">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="defines.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
