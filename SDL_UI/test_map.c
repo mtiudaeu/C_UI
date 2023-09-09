@@ -14,6 +14,7 @@ void test_map_run() {
     value = 2;
     map_add(map, &key, &value);
 
+    LOG_INFO("%s", _Generic(int, int: "tmp"));
 
 
     LOG_INFO("test_map Done");
