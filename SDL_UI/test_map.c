@@ -11,6 +11,8 @@ void test_map_run() {
     int key = 1;
     int value = 1;
     map_add(map, &key, &value);
+    value = 2;
+    map_add(map, &key, &value);
 
 
 

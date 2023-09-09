@@ -19,22 +19,19 @@
     .value_arr = dyn_buf_create(value_type) \
 }
 
-#define map_add(map, key, value) \
+#define map_add(map, key_ptr, value_ptr) \
 { \
-    int VAR_NAME(_found_) = dyn_buf_find_first_idx(map.key_arr, key); \
-}
-/*
+    int VAR_NAME(_found_) = dyn_buf_find_first_idx(map.key_arr, key_ptr); \
     if (VAR_NAME(_found_) == -1) \
     { \
-        dyn_buf_add(map.key_arr, key); \
-        dyn_buf_add(map.value_arr, value); \
+        dyn_buf_add(map.key_arr, *key_ptr); \
+        dyn_buf_add(map.value_arr, *value_ptr); \
     } \
     else \
     { \
-       map.value_arr[VAR_NAME(_found_)] = *value  \
-    } \    
+       map.value_arr.data[ VAR_NAME(_found_) ] = *value_ptr; \
+    } \
 }
-*/
 
 
 /*

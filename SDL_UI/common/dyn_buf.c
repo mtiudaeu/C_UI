@@ -40,11 +40,11 @@ int _dyn_buf_comparator_int(void* lhs, void* rhs)
  return 1;
 }
 //--------------------------------------------------
-int _dyn_buf_find_first_idx_specific(struct dyn_buf_info dyn_buf_info, void* data, void* value, int (*comparator)(void* lhs, void* rhs))
+int _dyn_buf_find_first_idx_specific(struct dyn_buf_info dyn_buf_info, void* data, void* value_ptr, int (*comparator)(void* lhs, void* rhs))
 {
     for(int i = 0; i < dyn_buf_info.size; i++)
     {
-        if (comparator((char*)data + (i * dyn_buf_info.size_of_one), value) == 0)
+        if (comparator((char*)data + (i * dyn_buf_info.size_of_one), value_ptr) == 0)
             return i;
     }
     return -1;
