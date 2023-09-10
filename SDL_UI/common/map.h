@@ -14,6 +14,10 @@
 dyn_buf_create( &(map_ptr)->key_arr );\
 dyn_buf_create( &(map_ptr)->value_arr);
 
+#define map_destroy(map_ptr)\
+dyn_buf_destroy( &(map_ptr)->key_arr );\
+dyn_buf_destroy( &(map_ptr)->value_arr);
+
 #define map_add(map_ptr, key_ptr, value_ptr) \
 { \
     int VAR_NAME(_found_) = dyn_buf_find_first_idx((map_ptr)->key_arr, key_ptr); \
@@ -28,7 +32,6 @@ dyn_buf_create( &(map_ptr)->value_arr);
     } \
 }
 
-//mdtmp return??? should be a function but cannot be generic. I think compare function + clone should be provided in map.
 #define map_get(map_ptr, key_ptr, output_ptr_ptr) \
 { \
     int VAR_NAME(_found_) = dyn_buf_find_first_idx((map_ptr)->key_arr, key_ptr); \

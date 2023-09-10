@@ -3,14 +3,15 @@
 
 #include "log.h"
 #include "map.h"
+#include "macros.h"
 
 void test_map_run() {
     LOG_INFO("test_map Start");
 
     
     struct map_int_int map_define(int, int) map;
-
-    map_create(&map)
+    map_create(&map);
+    //SCOPE(map_destroy(&map));
      
 
     int key = 1;
