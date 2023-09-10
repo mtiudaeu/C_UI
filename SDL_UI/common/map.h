@@ -8,42 +8,37 @@
 {                                                           \
     struct key_arr dyn_buf_define(key_type) key_arr;        \
     struct value_arr dyn_buf_define(value_type) value_arr;  \
-    int (*key_compare)(key_type lhs, key_type rhs); \
-    int (*value_compare)(value_type lhs, value_type rhs); \
 }
 
-#define map_create(key_type, value_type) \
-{ \
-    .key_arr = dyn_buf_create(key_type), \
-    .value_arr = dyn_buf_create(value_type) \
-}
+#define map_create(map_ptr) \
+dyn_buf_create( &(map_ptr)->key_arr );\
+dyn_buf_create( &(map_ptr)->value_arr);
 
-#define map_add(map, key_ptr, value_ptr) \
+#define map_add(map_ptr, key_ptr, value_ptr) \
 { \
-    int VAR_NAME(_found_) = dyn_buf_find_first_idx(map.key_arr, key_ptr); \
+    int VAR_NAME(_found_) = dyn_buf_find_first_idx((map_ptr)->key_arr, key_ptr); \
     if (VAR_NAME(_found_) == -1) \
     { \
-        dyn_buf_add(map.key_arr, *key_ptr); \
-        dyn_buf_add(map.value_arr, *value_ptr); \
+        dyn_buf_add((map_ptr)->key_arr, *key_ptr); \
+        dyn_buf_add((map_ptr)->value_arr, *value_ptr); \
     } \
     else \
     { \
-       map.value_arr.data[ VAR_NAME(_found_) ] = *value_ptr; \
+       (map_ptr)->value_arr.data[ VAR_NAME(_found_) ] = *value_ptr; \
     } \
 }
 
 //mdtmp return??? should be a function but cannot be generic. I think compare function + clone should be provided in map.
-#define map_get(map, key_ptr) \
+#define map_get(map_ptr, key_ptr, output_ptr_ptr) \
 { \
-    int VAR_NAME(_found_) = dyn_buf_find_first_idx(map.key_arr, key_ptr); \
+    int VAR_NAME(_found_) = dyn_buf_find_first_idx((map_ptr)->key_arr, key_ptr); \
     if (VAR_NAME(_found_) == -1) \
     { \
-        dyn_buf_add(map.key_arr, *key_ptr); \
-        dyn_buf_add(map.value_arr, *value_ptr); \
+        *output_ptr_ptr = 0x0;\
     } \
     else \
     { \
-       map.value_arr.data[ VAR_NAME(_found_) ] = *value_ptr; \
+        *output_ptr_ptr = &(map_ptr)->value_arr.data[ VAR_NAME(_found_) ]; \
     } \
 }
 

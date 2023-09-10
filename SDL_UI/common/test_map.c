@@ -1,4 +1,5 @@
 #include "test_map.h"
+#include "test.h"
 
 #include "log.h"
 #include "map.h"
@@ -6,30 +7,32 @@
 void test_map_run() {
     LOG_INFO("test_map Start");
 
-    /*
+    
     struct map_int_int map_define(int, int) map;
-    map_create( &map );
+
+    map_create(&map)
+     
 
     int key = 1;
     int value = 1;
-    map_add(map, &key, &value);
+    map_add(&map, &key, &value);
+
+    int* output_ptr;
+    map_get(&map, &key, &output_ptr);
+    TEST_ASSERT_TRUE("map_get", *output_ptr == 1);
+
     value = 2;
-    map_add(map, &key, &value);
-    */
+    map_add(&map, &key, &value);
+
+    map_get(&map, &key, &output_ptr);
+    TEST_ASSERT_TRUE("map_get", *output_ptr == 2);
+
+    key = 2;
+    map_get(&map, &key, &output_ptr);
+    TEST_ASSERT_TRUE("map_get", output_ptr == 0x0);
 
 
 
     LOG_INFO("test_map Done");
-    /*
-    struct map_str_str {
-        struct map_node {
-            struct str* key;
-            struct str* value;
-            struct map_node* left;
-            struct map_node* right;
-        } map_node;
-        size_t size;
-        struct map_node* head;
-    };
-    */
+
 }
