@@ -136,16 +136,17 @@
     <ClCompile Include="common\dyn_buf.c" />
     <ClCompile Include="common\log.c" />
     <ClCompile Include="common\str.c" />
+    <ClCompile Include="common\generic.c" />
     <ClCompile Include="main.c">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">include</AdditionalIncludeDirectories>
       <AdditionalModuleDependencies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">lib\SDl2.lib;lib\SDL2_ttf.lib;lib\SDL2_image.lib;lib\SDL2main.lib</AdditionalModuleDependencies>
     </ClCompile>
-    <ClCompile Include="map.c" />
+    <ClCompile Include="common\map.c" />
     <ClCompile Include="render_type.c" />
-    <ClCompile Include="test.c" />
-    <ClCompile Include="test_dyn_buf.c" />
-    <ClCompile Include="test_map.c" />
-    <ClCompile Include="test_str.c" />
+    <ClCompile Include="common\test.c" />
+    <ClCompile Include="common\test_dyn_buf.c" />
+    <ClCompile Include="common\test_map.c" />
+    <ClCompile Include="common\test_str.c" />
     <ClCompile Include="ui_file.c" />
   </ItemGroup>
   <ItemGroup>
@@ -156,11 +157,12 @@
     <ClInclude Include="common\str.h" />
     <ClInclude Include="common\test.h" />
     <ClInclude Include="defines.h" />
-    <ClInclude Include="map.h" />
+    <ClInclude Include="common\generic.h" />
+    <ClInclude Include="common\map.h" />
     <ClInclude Include="render_type.h" />
-    <ClInclude Include="test_dyn_buf.h" />
-    <ClInclude Include="test_map.h" />
-    <ClInclude Include="test_str.h" />
+    <ClInclude Include="common\test_dyn_buf.h" />
+    <ClInclude Include="common\test_map.h" />
+    <ClInclude Include="common\test_str.h" />
     <ClInclude Include="ui_file.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

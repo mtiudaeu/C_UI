@@ -1,13 +1,15 @@
 #pragma once
 
-#include "common/macros.h"
-#include "common/str.h"
-#include "common/dyn_buf.h"
+#include "macros.h"
+#include "str.h"
+#include "dyn_buf.h"
 
 #define map_define(key_type, value_type)                    \
 {                                                           \
     struct key_arr dyn_buf_define(key_type) key_arr;        \
     struct value_arr dyn_buf_define(value_type) value_arr;  \
+    int (*key_compare)(key_type lhs, key_type rhs); \
+    int (*value_compare)(value_type lhs, value_type rhs); \
 }
 
 #define map_create(key_type, value_type) \

@@ -1,6 +1,6 @@
-#include "common/test.h"
+#include "test.h"
 
-#include "common/log.h"
+#include "log.h"
 
 #include "test_map.h"
 #include "test_dyn_buf.h"

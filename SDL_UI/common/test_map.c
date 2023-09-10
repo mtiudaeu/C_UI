@@ -1,6 +1,6 @@
 #include "test_map.h"
 
-#include "common/log.h"
+#include "log.h"
 #include "map.h"
 
 void test_map_run() {
@@ -14,7 +14,6 @@ void test_map_run() {
     value = 2;
     map_add(map, &key, &value);
 
-    LOG_INFO("%s", _Generic(int, int: "tmp"));
 
 
     LOG_INFO("test_map Done");

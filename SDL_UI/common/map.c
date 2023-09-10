@@ -1,6 +1,6 @@
 #include "map.h"
 
-#include "common/allocator_cbs.h"
+#include "allocator_cbs.h"
 
 #include <stdio.h>
 #include <stdlib.h>

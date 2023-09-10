@@ -1,7 +1,7 @@
 #include "test_str.h"
 
-#include "common/macros.h"
-#include "common/str.h"
+#include "macros.h"
+#include "str.h"
 
 void test_str()
 {

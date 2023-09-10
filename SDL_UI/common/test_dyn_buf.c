@@ -2,11 +2,11 @@
 
 #include "test_dyn_buf.h"
 
-#include "common/test.h"
+#include "test.h"
 
 
-#include "common/dyn_buf.h"
-#include "common/log.h"
+#include "dyn_buf.h"
+#include "log.h"
 
 void test_dyn_buf_run()
 {

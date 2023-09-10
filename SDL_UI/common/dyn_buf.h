@@ -1,6 +1,11 @@
 #pragma once
 
 #include "allocator_cbs.h"
+#include "generic.h"
+
+//--------------------------------------------------
+// Generic dynamic buffer that keep type safety.
+// Macros are used to keep type safety.
 
 //--------------------------------------------------
 // Define structure
@@ -10,6 +15,7 @@ struct dyn_buf_info {
  size_t size;
  size_t capacity;
  size_t size_of_one;
+ int (*comparator)(void* lhs, void* rhs);
 };
 
 #define dyn_buf_define(type)             \
@@ -22,37 +28,37 @@ struct dyn_buf_info {
 // Create
 #define DYN_BUF_DEFAULT_CAPACITY 10
 
-#define dyn_buf_create(type)												\
-{																			\
- .dyn_buf_info = {															\
-  .allocator_cbs=default_allocators,										\
-  .size = 0,																\
-  .capacity = DYN_BUF_DEFAULT_CAPACITY,															\
-  .size_of_one= sizeof(type)												\
- },																			\
- .data=default_allocators.malloc(sizeof(type)*DYN_BUF_DEFAULT_CAPACITY)     \
+#define dyn_buf_create(type) \
+{ \
+ .dyn_buf_info = { \
+  .allocator_cbs=default_allocators, \
+  .size = 0, \
+  .capacity = DYN_BUF_DEFAULT_CAPACITY, \
+  .size_of_one = sizeof(type), \
+ }, \
+ .data=default_allocators.malloc(sizeof(type)*DYN_BUF_DEFAULT_CAPACITY) \
 }
 
-#define dyn_buf_create_1(type, param_capacity)                     \
-{                                                                  \
- .dyn_buf_info = {                                                 \
-  .allocator_cbs=default_allocators,                               \
-  .size = 0,                                                       \
-  .capacity = param_capacity,                                      \
-  .size_of_one= sizeof(type)                                       \
- },                                                                \
- .data=default_allocators.malloc(sizeof(type)*param_capacity)     \
+#define dyn_buf_create_1(type, param_capacity) \
+{ \
+ .dyn_buf_info = { \
+  .allocator_cbs=default_allocators, \
+  .size = 0, \
+  .capacity = param_capacity, \
+  .size_of_one = sizeof(type), \
+ }, \
+ .data=default_allocators.malloc(sizeof(type)*param_capacity) \
 }
 
 #define dyn_buf_create_2(type, param_capacity, param_allocator_cbs) \
-{                                                                   \
- .dyn_buf_info = {                                                  \
-  .allocator_cbs=param_allocator_cbs,                               \
-  .size = 0,                                                        \
-  .capacity = param_capacity,                                       \
-  .size_of_one= sizeof(type)                                        \
- },                                                                 \
- .data=param_allocator_cbs.malloc(sizeof(type)*param_capacity)      \
+{ \
+ .dyn_buf_info = { \
+  .allocator_cbs=param_allocator_cbs, \
+  .size = 0, \
+  .capacity = param_capacity, \
+  .size_of_one = sizeof(type), \
+ }, \
+ .data=param_allocator_cbs.malloc(sizeof(type)*param_capacity) \
 }
 
 //--------------------------------------------------
@@ -93,7 +99,7 @@ int _dyn_buf_comparator_int(void* lhs, void* rhs);
 
 #define _dyn_buf_find_first_idx(dyn_buf_info, data, value_ptr, typed_var)		\
 	_dyn_buf_find_first_idx_specific(dyn_buf_info, (void*) data, (void*) value_ptr,	\
-	_Generic((typed_var), int: &_dyn_buf_comparator_int) )
+	generic_comparator(typed_var) )
 
 int _dyn_buf_find_first_idx_specific(struct dyn_buf_info dyn_buf_info, void* data, void* value_ptr, int (*comparator)(void* lhs, void* rhs));
 
@@ -105,7 +111,7 @@ int _dyn_buf_find_first_idx_specific(struct dyn_buf_info dyn_buf_info, void* dat
 
 #define _dyn_buf_sort(dyn_buf_info, data, typed_var) \
  _dyn_buf_sort_specific(dyn_buf_info, (void*) data,	 \
- _Generic(typed_var, int: &_dyn_buf_comparator_int) )
+ generic_comparator(typed_var) )
 
 void _dyn_buf_sort_specific(struct dyn_buf_info dyn_buf_info, void* data, int (*comparator)(void* lhs, void* rhs));
 

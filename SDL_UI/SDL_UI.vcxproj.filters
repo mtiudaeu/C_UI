@@ -39,19 +39,22 @@
     <ClCompile Include="common\str.c">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="test.c">
+    <ClCompile Include="common\generic.c">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="map.c">
+    <ClCompile Include="common\map.c">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="test_str.c">
+    <ClCompile Include="commmon\test.c">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="test_map.c">
+    <ClCompile Include="commmon\test_dyn_buf.c">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="test_dyn_buf.c">
+    <ClCompile Include="commmon\test_map.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="commmon\test_str.c">
       <Filter>Source Files\common</Filter>
     </ClCompile>
   </ItemGroup>
@@ -80,19 +83,22 @@
     <ClInclude Include="common\log.h">
       <Filter>Header Files\common</Filter>
     </ClInclude>
-    <ClInclude Include="map.h">
-      <Filter>Header Files\common</Filter>
-    </ClInclude>
-    <ClInclude Include="test_str.h">
-      <Filter>Header Files\common</Filter>
-    </ClInclude>
-    <ClInclude Include="test_map.h">
-      <Filter>Header Files\common</Filter>
-    </ClInclude>
     <ClInclude Include="defines.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="test_dyn_buf.h">
+    <ClInclude Include="common\test_str.h">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\test_dyn_buf.h">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\test_map.h">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\map.h">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\generic.h">
       <Filter>Header Files\common</Filter>
     </ClInclude>
   </ItemGroup>

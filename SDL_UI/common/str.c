@@ -21,7 +21,9 @@ struct str_buf str_buf_create_1(size_t capacity, struct allocator_cbs allocator_
  const size_t size_of_one = sizeof(char);
  char* data = allocator_cbs.malloc(capacity *size_of_one);
 
- struct str_buf str_buf = dyn_buf_create_2(int, capacity, allocator_cbs);
+ struct str_buf str_buf = dyn_buf_create_2(char, capacity, allocator_cbs);
+
+
 /*
  struct str_buf str_buf = {
   .dyn_buf_info = {
