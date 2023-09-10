@@ -14,7 +14,6 @@ struct str_buf dyn_buf_define(char);
 
 
 struct str_buf str_buf_create(size_t capacity);
-struct str_buf str_buf_create_1(size_t capacity, struct allocator_cbs allocator_cbs);
 struct str_buf str_buf_copy(struct str* str);
 void str_buf_destroy(struct str_buf* str_buf_ptr);
 void str_buf_append(struct str_buf* str_buf_ptr, struct str str);

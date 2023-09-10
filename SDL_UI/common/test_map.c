@@ -7,7 +7,8 @@ void test_map_run() {
     LOG_INFO("test_map Start");
 
     /*
-    struct map_int_int map_define(int, int) map = map_create(int, int);
+    struct map_int_int map_define(int, int) map;
+    map_create( &map );
 
     int key = 1;
     int value = 1;

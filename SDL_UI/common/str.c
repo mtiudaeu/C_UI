@@ -13,29 +13,9 @@ static const struct str invalid_str = {
 //--------------------
 struct str_buf str_buf_create(size_t capacity)
 {
-	return str_buf_create_1(capacity, default_allocators);
-}
-//--------------------
-struct str_buf str_buf_create_1(size_t capacity, struct allocator_cbs allocator_cbs)
-{
- const size_t size_of_one = sizeof(char);
- char* data = allocator_cbs.malloc(capacity *size_of_one);
-
- struct str_buf str_buf = dyn_buf_create_2(char, capacity, allocator_cbs);
-
-
-/*
- struct str_buf str_buf = {
-  .dyn_buf_info = {
-   .allocator_cbs=allocator_cbs,
-   .size=0,
-   .capacity=size,
-   .size_of_one=size_of_one
-  },
-  .data=data
- };
-*/
- return str_buf;
+	struct str_buf str_buf;
+	dyn_buf_create_2(&str_buf, capacity);
+	return str_buf;
 }
 
 //------------------
@@ -49,8 +29,7 @@ struct str_buf str_buf_copy(struct str* str)
 //--------------------
 void str_buf_destroy(struct str_buf* str_buf_ptr)
 {
- str_buf_ptr->dyn_buf_info.allocator_cbs.free(str_buf_ptr->data);
- str_buf_ptr->data = 0x0;
+	dyn_buf_destroy(str_buf_ptr);
 }
 
 //--------------------
@@ -59,26 +38,26 @@ void str_buf_append(struct str_buf* str_buf_ptr, struct str str)
  if(!str_valid(str)) {
   return;
  }
- const size_t new_size = str_buf_ptr->dyn_buf_info.size + str.size;
- if(new_size > str_buf_ptr->dyn_buf_info.capacity)
+ const size_t new_size = str_buf_ptr->info.size + str.size;
+ if(new_size > str_buf_ptr->info.capacity)
  {
-  size_t new_capacity = MAX((2 * str_buf_ptr->dyn_buf_info.capacity), new_size);
-  str_buf_ptr->data = str_buf_ptr->dyn_buf_info.allocator_cbs.realloc(str_buf_ptr->data, new_capacity * str_buf_ptr->dyn_buf_info.size_of_one);
+  size_t new_capacity = MAX((2 * str_buf_ptr->info.capacity), new_size);
+  str_buf_ptr->data = str_buf_ptr->info.allocator_cbs.realloc(str_buf_ptr->data, new_capacity * str_buf_ptr->info.size_of_one);
 
-  str_buf_ptr->dyn_buf_info.capacity = new_capacity;
+  str_buf_ptr->info.capacity = new_capacity;
  }
 
- size_t old_size = str_buf_ptr->dyn_buf_info.size;
+ size_t old_size = str_buf_ptr->info.size;
  char* begin = str_buf_ptr->data + old_size;
  memcpy(begin, str.data, str.size);
- str_buf_ptr->dyn_buf_info.size = new_size;
+ str_buf_ptr->info.size = new_size;
 }
 
 //--------------------
 // overwrite the deleted part with the rest of the buffer
 void str_buf_remove(struct str_buf* str_buf_ptr, size_t begin, size_t end)
 {
- size_t prev_str_buf_size = str_buf_ptr->dyn_buf_info.size;
+ size_t prev_str_buf_size = str_buf_ptr->info.size;
  size_t valid_end = MIN(end, prev_str_buf_size);
 
  if(valid_end <= begin) {
@@ -92,9 +71,9 @@ void str_buf_remove(struct str_buf* str_buf_ptr, size_t begin, size_t end)
 
  char* dest_begin = str_buf_ptr->data + valid_begin;
  char* src_begin = dest_begin + remove_size;
- memcpy(dest_begin, src_begin, copy_size * str_buf_ptr->dyn_buf_info.size_of_one);
+ memcpy(dest_begin, src_begin, copy_size * str_buf_ptr->info.size_of_one);
 
- str_buf_ptr->dyn_buf_info.size = new_str_buf_size;
+ str_buf_ptr->info.size = new_str_buf_size;
 }
 
 //--------------------
@@ -103,7 +82,7 @@ struct str str_buf_str(struct str_buf str_buf)
  struct str str = 
  {
   .data = str_buf.data,
-  .size = str_buf.dyn_buf_info.size,
+  .size = str_buf.info.size,
  };
 
  return str;

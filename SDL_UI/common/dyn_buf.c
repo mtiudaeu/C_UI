@@ -40,8 +40,9 @@ int _dyn_buf_comparator_int(void* lhs, void* rhs)
  return 1;
 }
 //--------------------------------------------------
-int _dyn_buf_find_first_idx_specific(struct dyn_buf_info dyn_buf_info, void* data, void* value_ptr, int (*comparator)(void* lhs, void* rhs))
+int _dyn_buf_find_first_idx(struct dyn_buf_info dyn_buf_info, void* data, void* value_ptr)
 {
+    int (*comparator)(void* lhs, void* rhs) = dyn_buf_info.comparator;
     for(int i = 0; i < dyn_buf_info.size; i++)
     {
         if (comparator((char*)data + (i * dyn_buf_info.size_of_one), value_ptr) == 0)
@@ -126,8 +127,10 @@ void _heapify(struct dyn_buf_info dyn_buf_info, void* data, int (*comparator)(vo
  }
 }
 //--------------------------------------------------
-void _dyn_buf_sort_specific(struct dyn_buf_info dyn_buf_info, void* data, int (*comparator)(void* lhs, void* rhs))
+void _dyn_buf_sort(struct dyn_buf_info dyn_buf_info, void* data)
 {
+ int (*comparator)(void* lhs, void* rhs) = dyn_buf_info.comparator;
+ 
  const size_t size_of_one = dyn_buf_info.size_of_one; 
  const size_t size = dyn_buf_info.size;
  const struct allocator_cbs allocator_cbs = dyn_buf_info.allocator_cbs;

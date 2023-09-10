@@ -10,11 +10,9 @@
     struct value_arr dyn_buf_define(value_type) value_arr;  \
 }
 
-#define map_create(key_type, value_type) \
-{ \
-    .key_arr = dyn_buf_create(key_type), \
-    .value_arr = dyn_buf_create(value_type) \
-}
+#define map_create(map_ptr) \
+dyn_buf_create( &((map_ptr)->key_arr) );\
+dyn_buf_create( &((map_ptr)->value_arr) );
 
 #define map_add(map, key_ptr, value_ptr) \
 { \
