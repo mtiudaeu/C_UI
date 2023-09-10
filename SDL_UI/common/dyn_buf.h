@@ -2,6 +2,7 @@
 
 #include "allocator_cbs.h"
 #include "generic.h"
+#include "macros.h"
 
 //--------------------------------------------------
 // Generic dynamic buffer that keep type safety.
@@ -18,15 +19,45 @@ struct dyn_buf_info {
  int (*comparator)(void* lhs, void* rhs);
 };
 
+struct dyn_buf_interface{
+	void* data;
+	size_t size_of_one;
+	size_t size;
+	size_t capacity;
+	struct allocator_cbs allocator_cbs;
+	int (*comparator)(void* lhs, void* rhs);	
+};
+
+#define dyn_buf_define_2(type) \
+{ \
+	type* data; \
+	size_t size_of_one; \
+	size_t size; \
+	size_t capacity; \
+	struct allocator_cbs allocator_cbs; \
+	int (*comparator)(void* lhs, void* rhs); \
+}
+
+//--------------------------------------------------
+// Create
+#define DYN_BUF_DEFAULT_CAPACITY 10
+
+#define dyn_buf_create_5(dyn_buf)\
+(dyn_buf)->size_of_one = sizeof(*(dyn_buf)->data);\
+(dyn_buf)->size= 0;\
+(dyn_buf)->capacity = DYN_BUF_DEFAULT_CAPACITY;\
+(dyn_buf)->allocator_cbs = default_allocators;\
+(dyn_buf)->comparator = generic_comparator(*(dyn_buf)->data);\
+(dyn_buf)->data = (dyn_buf)->allocator_cbs.malloc((dyn_buf)->size_of_one * DYN_BUF_DEFAULT_CAPACITY);
+
+
 #define dyn_buf_define(type)             \
 {                                 \
  struct dyn_buf_info dyn_buf_info;\
  type* data;                      \
 }
 
-//--------------------------------------------------
-// Create
-#define DYN_BUF_DEFAULT_CAPACITY 10
+
 
 #define dyn_buf_create(type) \
 { \

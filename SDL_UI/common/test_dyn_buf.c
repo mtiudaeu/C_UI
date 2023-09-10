@@ -18,6 +18,10 @@ void test_dyn_buf_run()
 	dyn_buf_add(test_arr, 3);
 	dyn_buf_add(test_arr, 4);
 
+	struct arr3 dyn_buf_define_2(int);
+	struct arr3 tmp;
+	dyn_buf_create_5( &tmp );
+
 	int value = 3;
 	int should_be_2 = dyn_buf_find_first_idx(test_arr, &value);
 	TEST_ASSERT_TRUE("Find", should_be_2 == 2);

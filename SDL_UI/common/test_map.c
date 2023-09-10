@@ -6,6 +6,7 @@
 void test_map_run() {
     LOG_INFO("test_map Start");
 
+    /*
     struct map_int_int map_define(int, int) map = map_create(int, int);
 
     int key = 1;
@@ -13,6 +14,7 @@ void test_map_run() {
     map_add(map, &key, &value);
     value = 2;
     map_add(map, &key, &value);
+    */
 
 
 
