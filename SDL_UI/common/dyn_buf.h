@@ -51,7 +51,7 @@ struct dyn_buf_info {
 #define dyn_buf_destroy(dyn_buf_ptr)                          \
 _dyn_buf_destroy(&((dyn_buf_ptr)->info), (void**)&((dyn_buf_ptr)->data))
 
-void _dyn_buf_destroy(struct dyn_buf_info* dyn_buf_info, void** data);
+void _dyn_buf_destroy(struct dyn_buf_info* info, void** data);
 
 //--------------------------------------------------
 // Iterate/Get

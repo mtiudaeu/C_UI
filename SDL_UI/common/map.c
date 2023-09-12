@@ -5,6 +5,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void _map_destroy(
+    struct dyn_buf_info* key_arr_info,
+    void** key_arr_data,
+    struct dyn_buf_info* value_arr_info,
+    void** value_arr_data)
+{
+    _dyn_buf_destroy(key_arr_info, key_arr_data);
+    _dyn_buf_destroy(value_arr_info, value_arr_data);
+}
+
 /*
 //--------------------------------------------------
 struct map_node_str_str* _create_node(struct str key, struct str value) {

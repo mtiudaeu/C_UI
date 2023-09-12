@@ -15,8 +15,15 @@ dyn_buf_create( &(map_ptr)->key_arr );\
 dyn_buf_create( &(map_ptr)->value_arr);
 
 #define map_destroy(map_ptr)\
-dyn_buf_destroy( &(map_ptr)->key_arr );\
-dyn_buf_destroy( &(map_ptr)->value_arr);
+_map_destroy(\
+    &(map_ptr)->key_arr.info, &(map_ptr)->key_arr.data,\
+    &(map_ptr)->value_arr.info, &(map_ptr)->value_arr.data)
+
+void _map_destroy(
+    struct dyn_buf_info* key_arr_info,
+    void** key_arr_data,
+    struct dyn_buf_info* value_arr_info,
+    void** value_arr_data);
 
 #define map_add(map_ptr, key_ptr, value_ptr) \
 { \
