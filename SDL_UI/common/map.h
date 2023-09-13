@@ -4,10 +4,11 @@
 #include "str.h"
 #include "dyn_buf.h"
 
-#define map_define(key_type, value_type)                    \
-{                                                           \
-    struct key_arr dyn_buf_define(key_type) key_arr;        \
-    struct value_arr dyn_buf_define(value_type) value_arr;  \
+#define map_define(key_type, value_type)\
+{\
+    struct key_arr dyn_buf_define(key_type) key_arr;\
+    struct value_arr dyn_buf_define(value_type) value_arr;\
+    value_type (*return_type_cb)(void*, int);\
 }
 
 #define map_create(map_ptr) \
@@ -39,18 +40,8 @@ void _map_destroy(
     } \
 }
 
-#define map_get(map_ptr, key_ptr, output_ptr_ptr) \
-{ \
-    int VAR_NAME(_found_) = dyn_buf_find_first_idx((map_ptr)->key_arr, key_ptr); \
-    if (VAR_NAME(_found_) == -1) \
-    { \
-        *output_ptr_ptr = 0x0;\
-    } \
-    else \
-    { \
-        *output_ptr_ptr = &(map_ptr)->value_arr.data[ VAR_NAME(_found_) ]; \
-    } \
-}
+#define map_get(map_ptr, key_ptr) \
+    dyn_buf_safe_get((map_ptr)->value_arr, dyn_buf_find_first_idx((map_ptr)->key_arr, key_ptr))
 
 /*
 

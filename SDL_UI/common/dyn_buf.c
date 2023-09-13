@@ -5,6 +5,25 @@
 #include <string.h>
 
 //--------------------------------------------------
+int* _safe_get_int(void* data, int i)
+{
+    if (i == -1)
+        return 0x0;
+
+    int* data_int = (int*)data;
+    return &data_int[i];
+}
+char* _safe_get_char(void* data, int i)
+{
+    if (i == -1)
+        return 0x0;
+
+    int* data_int = (char*)data;
+    return &data_int[i];
+}
+
+
+//--------------------------------------------------
 void _dyn_buf_ensure_capacity_for_add(struct dyn_buf_info* dyn_buf_info, void** data)
 {
  const size_t new_size = dyn_buf_info->size + 1;

@@ -16,18 +16,17 @@ void test_map_run() {
         int value = 1;
         map_add(&map, &key, &value);
 
-        int* output_ptr;
-        map_get(&map, &key, &output_ptr);
-        TEST_ASSERT_TRUE("map_get", *output_ptr == 1);
 
+        int* output_ptr = map_get(&map, &key);
+        TEST_ASSERT_TRUE("map_get", * output_ptr == 1);
+        
         value = 2;
         map_add(&map, &key, &value);
-
-        map_get(&map, &key, &output_ptr);
+        output_ptr = map_get(&map, &key);
         TEST_ASSERT_TRUE("map_get", *output_ptr == 2);
-
+        
         key = 2;
-        map_get(&map, &key, &output_ptr);
+        output_ptr = map_get(&map, &key);
         TEST_ASSERT_TRUE("map_get", output_ptr == 0x0);
     }
 
