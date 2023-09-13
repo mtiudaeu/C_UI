@@ -1,5 +1,8 @@
 #include "ui_file.h"
 
+#include "common/map.h"
+#include "common/str.h"
+
 #include <stdio.h>
 
 #define BUFFER_SIZE 1024
@@ -44,6 +47,9 @@ int create_render_type(FILE* file)
     DWORD bytesRead, totalBytesRead = 0;
     BOOL eof = FALSE;
 
+    struct map_str_str map_define(struct str_buf, struct str_buf) map;
+    //mdtmpmap_create(&map);
+
     // Step 3 and 4: Read and process the file line by line
     while (!eof) {
         if (!ReadFile(file, buffer, BUFFER_SIZE, &bytesRead, NULL)) {
@@ -61,6 +67,11 @@ int create_render_type(FILE* file)
             if (buffer[i] == '\n') {
                 // Process the line (you can print it, store it, etc.)
                 buffer[i] = '\0'; // Null-terminate the line
+                struct str_buf tmp = str_buf_copy(cstr(&buffer));
+
+                
+
+                //mdtmp add line to map
                 printf("Line: %s\n", buffer);
             }
         }

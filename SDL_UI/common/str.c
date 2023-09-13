@@ -19,10 +19,10 @@ struct str_buf str_buf_create(size_t capacity)
 }
 
 //------------------
-struct str_buf str_buf_copy(struct str* str)
+struct str_buf str_buf_copy(struct str str)
 {
-	struct str_buf str_buf = str_buf_create(str->size);
-	memcpy(str_buf.data, str->data, str->size * sizeof(*str->data));
+	struct str_buf str_buf = str_buf_create(str.size);
+	memcpy(str_buf.data, str.data, str.size * sizeof(*str.data));
 	return str_buf;
 }
 

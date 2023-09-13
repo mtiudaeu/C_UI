@@ -23,11 +23,11 @@ struct dyn_buf_info {
 { \
 	type* data; \
 	struct dyn_buf_info info;\
-	type* (*safe_get)(void*, int);\
+	type* (*safe_get)(void*, int, int);\
 }
 //mdtmp
-int* _safe_get_int(void* data, int i);
-char* _safe_get_char(void* data, int i);
+//mdtmp int* _safe_get_int(void* data, int i);
+//mdtmp char* _safe_get_char(void* data, int i);
 
 //--------------------------------------------------
 // Create
@@ -40,7 +40,7 @@ char* _safe_get_char(void* data, int i);
 (dyn_buf)->info.allocator_cbs = default_allocators;\
 (dyn_buf)->info.comparator = generic_comparator(*(dyn_buf)->data);\
 (dyn_buf)->data = (dyn_buf)->info.allocator_cbs.malloc((dyn_buf)->info.size_of_one * DYN_BUF_DEFAULT_CAPACITY);\
-(dyn_buf)->safe_get = _Generic(*(dyn_buf)->data, int:&_safe_get_int, char:&_safe_get_char);
+(dyn_buf)->safe_get = generic_safe_get(*(dyn_buf)->data);
 
 #define dyn_buf_create_2(dyn_buf, capacity)\
 (dyn_buf)->info.size_of_one = sizeof(*(dyn_buf)->data);\
@@ -73,7 +73,7 @@ dyn_buf.data[i]
 dyn_buf.data[i]
 
 #define dyn_buf_safe_get(dyn_buf, i) \
-dyn_buf.safe_get(dyn_buf.data, i)
+dyn_buf.safe_get(dyn_buf.data, dyn_buf.info.size, i)
 
 //--------------------------------------------------
 // Add
